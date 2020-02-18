@@ -51,3 +51,9 @@ button:hover {
 .shopping-item__checked {
   text-decoration: line-through;
 }
+.done{
+  text-decoration: line-through;
+}
+.pink{
+  color: pink;
+}

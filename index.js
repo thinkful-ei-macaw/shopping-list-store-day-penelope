@@ -1,18 +1,30 @@
 const store = {
   items: [
-    { id: cuid(), name: 'apples', checked: false },
-    { id: cuid(), name: 'oranges', checked: false },
-    { id: cuid(), name: 'milk', checked: true },
-    { id: cuid(), name: 'bread', checked: false }
+    {edit:false, id: cuid(), name: 'notebook', checked: false },
+    {edit:false ,id: cuid(), name: 'oranges', checked: true },
+    {edit:false,id: cuid(), name: 'lettuce', checked: false },
+    {edit:false,id: cuid(), name: 'spanish rice', checked:false }
   ],
   hideCheckedItems: false
-};
+
+}
+  
+  
+  // {
+   //var list = document.createElement("li")
+  // for (var i=0;i<list.length; i++){
+  //   list[i].addEventListener("click", liClick);
+   // };
+   // function liClick() {
+    //  this.classlist.toggle("done");
+   // }///handle click, change value , and rerender/
 
 const generateItemElement = function (item) {
   let itemTitle = `<span class='shopping-item shopping-item__checked'>${item.name}</span>`;
   if (!item.checked) {
     itemTitle = `
      <span class='shopping-item'>${item.name}</span>
+     
     `;
   }
 
@@ -25,7 +37,8 @@ const generateItemElement = function (item) {
         </button>
         <button class='shopping-item-delete js-item-delete'>
           <span class='button-label'>delete</span>
-        </button>
+</button>
+<button class ="jsitemedit"> edit </button>
       </div>
     </li>`;
 };
@@ -38,7 +51,17 @@ const generateShoppingItemsString = function (shoppingList) {
 /**
  * Render the shopping list in the DOM
  */
-const render = function () {
+const render = function()
+const handleNewItemSubmit = function () {
+  $('#js-shopping-list-form').submit(function (event) {
+    event.preventDefault();
+    const newItemName = $('.js-shopping-list-entry').val();
+    $('.js-shopping-list-entry').val('');
+    addItemToShoppingList(newItemName);
+    render();
+  });
+};
+
   // Set up a copy of the store's items in a local 
   // variable 'items' that we will reassign to a new
   // version if any filtering of the list occurs.
